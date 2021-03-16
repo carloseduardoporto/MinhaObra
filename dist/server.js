@@ -4,7 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
+var routes_1 = __importDefault(require("../shared/http/routes"));
 var app = express_1.default();
+app.use(routes_1.default);
+app.get('/', function (request, response) {
+    return response.json({ message: 'hello world' });
+});
 app.listen(3334, function () {
     console.log('app rolando');
 });
