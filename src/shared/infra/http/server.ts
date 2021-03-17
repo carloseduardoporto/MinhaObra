@@ -1,12 +1,11 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 import '../typeorm';
-import '@shared/infra/typeorm';
+
 import '@shared/container';
 
 import cors from 'cors';
 import express from 'express';
 import routes from './routes';
-
 
 const app = express();
 app.use(cors());

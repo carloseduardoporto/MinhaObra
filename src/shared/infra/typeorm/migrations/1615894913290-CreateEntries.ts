@@ -1,9 +1,14 @@
-import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export class CreateEntrie1615894913290 implements MigrationInterface {
-
-    public async up(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.createTable(new Table({
+export default class CreateEntrie1615894913290 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
         name: 'entries',
         columns: [
           {
@@ -32,24 +37,27 @@ export class CreateEntrie1615894913290 implements MigrationInterface {
             name: 'construction_id',
             type: 'uuid',
             isNullable: false,
-          }
-        ]
-      }))
+          },
+        ],
+      }),
+    );
 
-      await queryRunner.createForeignKey('entries', new TableForeignKey({
+    await queryRunner.createForeignKey(
+      'entries',
+      new TableForeignKey({
         name: 'EntriesConstruction',
         columnNames: ['construction_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'constructions',
-        onDelete: 'SETNULL',
-        onUpdate: 'CASCADE'
-      }))
-    }
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    );
+  }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropForeignKey('entries', 'EntriesConstruction');
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropForeignKey('entries', 'EntriesConstruction');
 
-      await queryRunner.dropTable('entries');
-    }
-
+    await queryRunner.dropTable('entries');
+  }
 }

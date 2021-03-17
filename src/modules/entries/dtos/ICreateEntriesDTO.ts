@@ -1,6 +1,6 @@
 export default interface ICreateEntriesDTO {
   description: string;
-  quantity: Number;
+  quantity: number;
   isPayed: boolean;
   construction_id: string;
 }

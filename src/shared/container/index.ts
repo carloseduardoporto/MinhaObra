@@ -9,19 +9,17 @@ import ConstructionsRepository from '@modules/constructions/infra/typeorm/reposi
 import IEntriesRepository from '@modules/entries/repositories/IEntriesRepository';
 import EntriesRepository from '@modules/entries/infra/typeorm/repositories/EntriesRepository';
 
-
-
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
-  UsersRepository
-)
+  UsersRepository,
+);
 
 container.registerSingleton<IConstructionsRepository>(
   'ConstructionsRepository',
-  ConstructionsRepository
-)
+  ConstructionsRepository,
+);
 
 container.registerSingleton<IEntriesRepository>(
   'EntriesRepository',
-  EntriesRepository
-)
+  EntriesRepository,
+);

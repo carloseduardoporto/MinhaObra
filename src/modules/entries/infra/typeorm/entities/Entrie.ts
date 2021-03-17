@@ -1,4 +1,12 @@
-import {Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, JoinColumn, ManyToOne, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  ManyToOne,
+  UpdateDateColumn,
+} from 'typeorm';
 import Construction from '@modules/constructions/infra/typeorm/entities/Construction';
 
 @Entity('entries')
@@ -10,7 +18,7 @@ class Entrie {
   description: string;
 
   @Column()
-  quantity: Number;
+  quantity: number;
 
   @Column()
   isPayed: boolean;
@@ -25,9 +33,8 @@ class Entrie {
   construction_id: string;
 
   @ManyToOne(() => Construction, construction => construction.entrie_id)
-  @JoinColumn({ name: 'construction_id'})
+  @JoinColumn({ name: 'construction_id' })
   construction: Construction;
-
 }
 
 export default Entrie;

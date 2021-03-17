@@ -3,7 +3,6 @@ import IEntriesRepository from '@modules/entries/repositories/IEntriesRepository
 import { Repository, getRepository } from 'typeorm';
 import Entrie from '../entities/Entrie';
 
-
 class EntriesRepository implements IEntriesRepository {
   private ormRepository: Repository<Entrie>;
 
@@ -11,9 +10,17 @@ class EntriesRepository implements IEntriesRepository {
     this.ormRepository = getRepository(Entrie);
   }
 
-  public async create({quantity, construction_id, isPayed, description }: ICreateEntriesDTO): Promise<Entrie> {
+  public async create({
+    quantity,
+    construction_id,
+    isPayed,
+    description,
+  }: ICreateEntriesDTO): Promise<Entrie> {
     const entrie = this.ormRepository.create({
-
+      quantity,
+      construction_id,
+      isPayed,
+      description,
     });
 
     await this.ormRepository.save(entrie);
@@ -23,9 +30,7 @@ class EntriesRepository implements IEntriesRepository {
 
   public async save(entrie: Entrie): Promise<Entrie> {
     return this.ormRepository.save(entrie);
-
   }
 }
-
 
 export default EntriesRepository;
