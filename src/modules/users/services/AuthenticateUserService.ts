@@ -1,8 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
+import AppError from '@shared/errors/AppError';
 import User from '../infra/typeorm/entities/User';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
+import AuthConfig from '../../../config/auth';
 
 interface IRequest {
   email: string;
@@ -28,7 +30,7 @@ class AuthenticateUserService {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('Incorrect email/password combination');
+      throw new AppError('Incorrect email/password combination', 401);
     }
 
     // password é a senha normal
@@ -40,12 +42,14 @@ class AuthenticateUserService {
     );
 
     if (!passwordMatched) {
-      throw new Error('Incorrect email/password combination');
+      throw new AppError('Incorrect email/password combination', 401);
     }
 
-    const token = sign({}, 'uas90d0aisd0asd0aksdasd', {
+    const { secret, expiresIn } = AuthConfig.jwt;
+
+    const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn,
     });
 
     return {
