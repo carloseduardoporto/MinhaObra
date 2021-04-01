@@ -31,6 +31,12 @@ class EntriesRepository implements IEntriesRepository {
   public async save(entrie: Entrie): Promise<Entrie> {
     return this.ormRepository.save(entrie);
   }
+
+  public async listAllConstructionEntries(
+    construction_id: string,
+  ): Promise<Entrie[]> {
+    return this.ormRepository.find({ where: { construction_id } });
+  }
 }
 
 export default EntriesRepository;

@@ -5,5 +5,6 @@ const constructionsRouter = Router();
 const constructionController = new ConstructionsController();
 
 constructionsRouter.post('/', constructionController.create);
+constructionsRouter.get('/', constructionController.index);
 
 export default constructionsRouter;

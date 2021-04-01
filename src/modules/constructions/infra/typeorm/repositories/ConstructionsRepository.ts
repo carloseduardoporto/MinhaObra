@@ -33,6 +33,10 @@ class ConstructionsRepository implements IConstructionsRepository {
   public async save(construction: Construction): Promise<Construction> {
     return this.ormRepository.save(construction);
   }
+
+  public async listAllConstructions(user_id: string): Promise<Construction[]> {
+    return this.ormRepository.find({ where: { user_id } });
+  }
 }
 
 export default ConstructionsRepository;

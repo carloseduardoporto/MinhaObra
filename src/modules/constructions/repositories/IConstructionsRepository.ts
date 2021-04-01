@@ -10,4 +10,5 @@ export default interface IConstructionsRepository {
     started_at,
   }: ICreateConstructionsDTO): Promise<Construction>;
   save(construction: Construction): Promise<Construction>;
+  listAllConstructions(id: string): Promise<Construction[]>;
 }

@@ -1,4 +1,3 @@
-import { v4 } from 'uuid';
 import {
   Entity,
   Column,
@@ -42,19 +41,6 @@ class Construction {
     cascade: true,
   })
   entrie_id: Entrie[];
-
-  constructor(
-    name: string,
-    metragem: number,
-    valorDaObra: number,
-    started_at: Date,
-  ) {
-    this.id = v4();
-    this.name = name;
-    this.metragem = metragem;
-    this.valorDaObra = valorDaObra;
-    this.started_at = started_at;
-  }
 }
 
 export default Construction;
